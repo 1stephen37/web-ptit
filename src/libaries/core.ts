@@ -1,4 +1,4 @@
-import pageController from "../controllers/pageController.ts";
+// import pageController from "../controllers/pageController.ts";
 // import accountController from "../controllers/accountController.ts";
 import adminController from "../controllers/adminController.ts";
 
@@ -16,10 +16,10 @@ class core {
 
         let ctrl : any;
         switch (this.controller) {
-            case 'page': {
-                ctrl = new pageController();
-                break;
-            }
+            // case 'page': {
+            //     ctrl = new pageController();
+            //     break;
+            // }
             // case 'account': {
             //     ctrl = new accountController();
             //     break;
@@ -28,10 +28,10 @@ class core {
                 ctrl = new adminController();
                 break;
             }
-            default: {
-                ctrl = new pageController();
-                break;
-            }
+            // default: {
+            //     ctrl = new pageController();
+            //     break;
+            // }
         }
 
         ctrl[this.method](...this.params);

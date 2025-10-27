@@ -2,10 +2,10 @@ import {$} from '../constants/main.ts';
 import {API} from "../constants/main.ts";
 import CategoriesModel from '../models/categoriesModel.ts';
 import ProductsModel from "../models/productsModel.ts";
-import UsersModel from "../models/usersModel.ts";
-import VouchersModel from '../models/vouchersModel.ts';
-import OrdersModel from "../models/ordersModel.ts";
-import orderDetailsModel from "../models/orderDetailsModel.ts";
+// import UsersModel from "../models/usersModel.ts";
+// import VouchersModel from '../models/vouchersModel.ts';
+// import OrdersModel from "../models/ordersModel.ts";
+// import orderDetailsModel from "../models/orderDetailsModel.ts";
 import notification from "../form/notification.ts";
 import deliveriesModel from "../models/deliveriesModel.ts";
 // import confirm from "../form/confirm.ts";
@@ -132,21 +132,21 @@ class coreController {
             case 'products': {
                 return new ProductsModel(API.endPoint);
             }
-            case 'users': {
-                return new UsersModel(API.endPoint);
-            }
-            case 'vouchers': {
-                return new VouchersModel(API.endPoint);
-            }
+            // case 'users': {
+            //     return new UsersModel(API.endPoint);
+            // }
+            // case 'vouchers': {
+            //     return new VouchersModel(API.endPoint);
+            // }
             case 'deliveries': {
                 return new deliveriesModel(API.endPoint);
             }
-            case 'orders': {
-                return new OrdersModel(API.endPoint);
-            }
-            case 'orderDetails': {
-                return new orderDetailsModel(API.endPoint);
-            }
+            // case 'orders': {
+            //     return new OrdersModel(API.endPoint);
+            // }
+            // case 'orderDetails': {
+            //     return new orderDetailsModel(API.endPoint);
+            // }
             default: {
                 break;
             }
