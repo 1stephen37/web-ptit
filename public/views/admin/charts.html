@@ -3,17 +3,42 @@
 
     <div class="date-range flatpickr">
         <label for="fromDate">Từ ngày</label>
-        <input id="fromDate" type="text" placeholder="mm/dd/yyyy --:--" />
+        <input id="fromDate" type="text" placeholder="mm/dd/yyyy --:--"/>
 
         <label for="toDate">Đến ngày</label>
-        <input id="toDate" type="text" placeholder="mm/dd/yyyy --:--" />
+        <input id="toDate" type="text" placeholder="mm/dd/yyyy --:--"/>
 
         <button id="filterBtn">Lọc dữ liệu</button>
         <button id="resetBtn">Reset</button>
     </div>
 
+    <div class="time">
+        <h2 class="heading">Điều Khiển Hẹn Giờ</h2>
+        <div class="timer">
+            <label for="timer">
+                <input type="time" id="timer"/>
+            </label>
+            <button>Bắt Đầu</button>
+        </div>
+    </div>
+
+    <div class="environments">
+        <div class="heading">Các chỉ số Môi Trường</div>
+        <div class="value">
+            <p id="environment-temperature"></p>
+            <p id="environment-humidity"></p>
+            <p id="environment-rainfall"></p>
+            <p id="environment-NITROGEN"></p>
+            <p id="environment-PHOSPHORUS"></p>
+            <p id="environment-POTASSIUM"></p>
+            <p id="environment-PH"></p>
+        </div>
+        <div id="result"></div>
+        <button type="submit">Tự động điều chỉnh môi trường</button>
+    </div>
+
     <form id="dataForm">
-        <div class="heading">Form mẫu thay đổi dữ liệu (biểu đồ nhiệt độ): </div>
+        <div class="heading">Form mẫu thay đổi dữ liệu (biểu đồ nhiệt độ):</div>
         <label for="month">Tháng:</label>
         <select id="month" required>
             <option value="">Chọn tháng</option>

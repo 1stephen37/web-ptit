@@ -85,6 +85,43 @@
     background-color: #45a049;
 }
 
+#container .content .chart-container .time {
+    margin-top: 2rem;
+}
+
+#container .content .chart-container .time .heading {
+    font-size: 3rem;
+}
+
+#container .content .chart-container .time .timer button {
+    padding: 6px 10px;
+    font-size: 2rem;
+}
+
+#container .content .chart-container .environments {
+    margin-top: 2rem;
+}
+
+#container .content .chart-container .environments .heading {
+    font-size: 3rem;
+}
+
+#container .content .chart-container .environments #result {
+    font-size: 2.4rem;
+    color: red;
+    font-weight: bold;
+}
+
+#container .content .chart-container .environments button {
+    margin-top: 1rem ;
+    padding: 6px 10px;
+    font-size: 2rem;
+}
+
+#container .content .chart-container .environments .value {
+    font-size: 2.8rem;
+}
+
 input[type="text"] {
     padding: 6px 8px;
     border: 1px solid #ccc;

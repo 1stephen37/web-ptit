@@ -22,6 +22,65 @@ const options: flatpickr.Options.Options = {
     defaultHour: 12,            // Giờ mặc định (ví dụ 11:00 AM)
 };
 
+let temperatureEM = 25; // Nhiệt độ
+let humidityEM = 60; // Độ ẩm
+let rainfallEM = 12; // Lượng mưa
+let NITROGENEM = 45; // Chỉ số Nitơ
+let PHOSPHORUSEM = 35; // Chỉ số Phốt Pho
+let POTASSIUMEM = 50; // Chỉ số Kali
+let PHEM = 6.5; // Chỉ số pH
+
+function generateRecommendation(
+    temperatureEM: number,
+    humidityEM: number,
+    rainfallEM: number,
+    NITROGENEM: number,
+    PHOSPHORUSEM: number,
+    POTASSIUMEM: number,
+    PHEM: number
+) {
+    let recommendation: string[] = [];
+
+    // Khuyến nghị dựa trên nhiệt độ
+    if (temperatureEM > 30) {
+        recommendation.push("Giảm nhiệt độ, có thể bằng cách tăng cường thông gió.");
+    } else if (temperatureEM < 15) {
+        recommendation.push("Tăng nhiệt độ, có thể bằng cách sử dụng thiết bị sưởi.");
+    }
+
+    // Khuyến nghị dựa trên độ ẩm
+    if (humidityEM > 70) {
+        recommendation.push("Cần giảm độ ẩm, có thể bằng cách sử dụng máy hút ẩm.");
+    } else if (humidityEM < 40) {
+        recommendation.push("Tăng cường độ ẩm, có thể bằng cách tưới nước.");
+    }
+
+    // Khuyến nghị dựa trên lượng mưa
+    if (rainfallEM < 20) {
+        recommendation.push("Lượng mưa thấp, cần tưới cây thường xuyên.");
+    } else if (rainfallEM > 50) {
+        recommendation.push("Lượng mưa cao, cần kiểm tra hệ thống thoát nước.");
+    }
+
+    // Khuyến nghị dựa trên các chỉ số dinh dưỡng
+    if (NITROGENEM < 30) {
+        recommendation.push("Thiếu Nitơ, cân nhắc bón phân chứa Nitơ.");
+    }
+    if (PHOSPHORUSEM < 20) {
+        recommendation.push("Thiếu Phốt Pho, cân nhắc bón phân chứa Phốt Pho.");
+    }
+    if (POTASSIUMEM < 40) {
+        recommendation.push("Thiếu Kali, cân nhắc bón phân chứa Kali.");
+    }
+
+    if (PHEM < 6.0) {
+        recommendation.push("pH thấp, cần điều chỉnh pH bằng vôi.");
+    } else if (PHEM > 7.0) {
+        recommendation.push("pH cao, cần điều chỉnh pH bằng lưu huỳnh.");
+    }
+
+    return recommendation.length > 0 ? `Khuyến nghị thay đổi: ${recommendation.join(" ")}` : "Khuyến nghị thay đổi: Tình trạng môi trường ổn định.";
+}
 
 export default class adminController extends CoreController {
     constructor() {
@@ -92,6 +151,11 @@ export default class adminController extends CoreController {
                 const toDate = toPicker.input.value;
                 console.log("Từ ngày:", fromDate, "Đến ngày:", toDate);
             });
+
+            ($('#container .content .chart-container .time .timer button') as HTMLButtonElement).onclick = () => {
+                const timeInput = ($('#container .content .chart-container .time .timer input#timer') as HTMLInputElement).value;
+                alert(`Hẹn giờ đã được thiết lập cho ${timeInput}`);
+            }
 
             const temperature = (document.getElementById('temperature') as HTMLCanvasElement).getContext('2d');
             let temperatureChart: Chart<"line", number[], string>;
@@ -225,7 +289,7 @@ export default class adminController extends CoreController {
 
             const rainfall = (document.getElementById('rainfall') as HTMLCanvasElement).getContext('2d');
             if (rainfall) new Chart(rainfall, {
-                type: 'bar', // Loại biểu đồ là cột
+                type: 'bar',
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Nhãn cho các tháng
                     datasets: [{
@@ -584,7 +648,82 @@ export default class adminController extends CoreController {
 
                     temperatureChart.update();
                 }
-            })
+            });
+
+            ($('#container .content .chart-container .environments #result') as HTMLElement).innerHTML = generateRecommendation(temperatureEM, humidityEM, rainfallEM, NITROGENEM, PHOSPHORUSEM, POTASSIUMEM, PHEM);
+
+            const temperatureElement = $('#container .content .chart-container .environments #environment-temperature') as HTMLElement;
+            const humidityElement = $('#container .content .chart-container .environments #environment-humidity') as HTMLElement;
+            const rainfallElement = $('#container .content .chart-container .environments #environment-rainfall') as HTMLElement;
+            const NITROGENElement = $('#container .content .chart-container .environments #environment-NITROGEN') as HTMLElement;
+            const PHOSPHORUSElement = $('#container .content .chart-container .environments #environment-PHOSPHORUS') as HTMLElement;
+            const POTASSIUMElement = $('#container .content .chart-container .environments #environment-POTASSIUM') as HTMLElement;
+            const PHElement = $('#container .content .chart-container .environments #environment-PH') as HTMLElement;
+
+            temperatureElement.innerHTML = `Nhiệt độ: ${temperatureEM} °C`;
+            humidityElement.innerHTML = `Độ ẩm: ${humidityEM} %`;
+            rainfallElement.innerHTML = `lượng mưa: ${rainfallEM} mm`;
+            NITROGENElement.innerHTML = `NITROGEN: ${NITROGENEM} ppm`;
+            PHOSPHORUSElement.innerHTML = `PHOSPHORUS: ${PHOSPHORUSEM} ppm`;
+            POTASSIUMElement.innerHTML = `POTASSIUM: ${POTASSIUMEM} ppm`;
+            PHElement.innerHTML = `PH: ${PHEM} pH`;
+
+            ($('#container .content .chart-container .environments button') as HTMLButtonElement).onclick = function () {
+                console.log(rainfallEM);
+                if (temperatureEM > 30) {
+                    temperatureEM -= 1; // Giảm nhiệt độ nếu quá cao
+                } else if (temperatureEM < 20) {
+                    temperatureEM += 1; // Tăng nhiệt nếu quá thấp
+                }
+
+                if (humidityEM > 70) {
+                    humidityEM -= 5; // Giảm độ ẩm nếu quá cao
+                } else if (humidityEM < 40) {
+                    humidityEM += 5; // Tăng độ ẩm nếu quá thấp
+                }
+
+                if (rainfallEM < 20) {
+                    rainfallEM += 3; // Tăng lượng mưa nếu quá thấp
+                } else if (rainfallEM > 50) {
+                    rainfallEM -= 3; // Giảm lượng mưa nếu quá cao
+                }
+
+                if (NITROGENEM < 30) {
+                    NITROGENEM += 2; // Tăng nitơ nếu thiếu
+                } else if (NITROGENEM > 60) {
+                    NITROGENEM -= 2; // Giảm nitơ nếu quá cao
+                }
+
+                if (PHOSPHORUSEM < 20) {
+                    PHOSPHORUSEM += 1; // Tăng phốt pho nếu thiếu
+                } else if (PHOSPHORUSEM > 40) {
+                    PHOSPHORUSEM -= 1; // Giảm phốt pho nếu quá cao
+                }
+
+                if (POTASSIUMEM < 40) {
+                    POTASSIUMEM += 3; // Tăng kali nếu thiếu
+                } else if (POTASSIUMEM > 60) {
+                    POTASSIUMEM -= 3; // Giảm kali nếu quá cao
+                }
+
+                if (PHEM < 6.0) {
+                    PHEM += 0.1; // Tăng pH nếu quá thấp
+                } else if (PHEM > 7.5) {
+                    PHEM -= 0.1; // Giảm pH nếu quá cao
+                }
+
+                temperatureElement.innerHTML = `Nhiệt độ: ${temperatureEM} °C`;
+                humidityElement.innerHTML = `Độ ẩm: ${humidityEM} %`;
+                rainfallElement.innerHTML = `lượng mưa: ${rainfallEM} mm`;
+                NITROGENElement.innerHTML = `NITROGEN: ${NITROGENEM} ppm`;
+                PHOSPHORUSElement.innerHTML = `PHOSPHORUS: ${PHOSPHORUSEM} ppm`;
+                POTASSIUMElement.innerHTML = `POTASSIUM: ${POTASSIUMEM} ppm`;
+                PHElement.innerHTML = `PH: ${PHEM} pH`;
+
+                const result = generateRecommendation(temperatureEM, humidityEM, rainfallEM, NITROGENEM, PHOSPHORUSEM, POTASSIUMEM, PHEM);
+                ($('#container .content .chart-container .environments #result') as HTMLElement).innerHTML = result;
+                if (result === 'Khuyến nghị thay đổi: Tình trạng môi trường ổn định.') alert('Môi trường đã ổn định, không cần điều chỉnh nữa');
+            }
         })
     }
 
