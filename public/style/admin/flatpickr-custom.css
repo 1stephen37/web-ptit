@@ -1,0 +1,66 @@
+/* ============= FLATPICKR CUSTOM FONT SIZE ============= */
+
+/* Toàn bộ lịch */
+.flatpickr-calendar {
+    font-size: 16px; /* tăng base font */
+    line-height: 1.5;
+}
+
+/* Header tháng/năm */
+.flatpickr-months {
+    font-size: 18px; /* tháng to hơn */
+    font-weight: 600;
+}
+
+/* Ngày trong tháng */
+.flatpickr-day {
+    font-size: 15px;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+}
+
+/* Giờ và phút */
+.flatpickr-time input {
+    font-size: 16px;
+    height: 38px;
+    width: 55px;
+}
+
+/* Ô chọn AM/PM */
+.flatpickr-am-pm {
+    font-size: 15px;
+    padding: 6px 10px;
+}
+
+/* Nút điều hướng tháng */
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    width: 18px;
+    height: 18px;
+}
+
+.flatpickr-current-month input.cur-year {
+    font-size: 16px; /* chữ to hơn */
+    /*width: 60px;*/
+    /*height: 30px;*/
+    /*padding: 2px 4px;*/
+}
+
+.flatpickr-current-month input.cur-year::-webkit-inner-spin-button {
+    opacity: 1;
+    width: 12px;
+    height: 12px;
+}
+
+/* Padding thêm cho toàn popup */
+.flatpickr-innerContainer {
+    padding: 6px;
+}
+
+/* Tooltip, week day headers */
+.flatpickr-weekday {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}

@@ -1,0 +1,105 @@
+#container .content .chart-container .flatpickr {
+    all: revert;
+}
+
+#container .content .chart-container {
+    padding: 0 2rem;
+}
+
+#container .content .chart-container .heading {
+    font-size: 2.6rem;
+}
+
+#container .content .chart-container .date-range {
+    font-size: 2.6rem;
+    margin-top: 2rem;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*gap: 10px;*/
+}
+
+#container .content .chart-container .chart-content {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /*flex-direction: column;*/
+    gap: 2rem;
+}
+
+#container .content .chart-container .chart-content .chart-item {
+
+}
+
+#container .content .chart-container .chart-content .chart-item .heading {
+    font-size: 2rem;
+}
+
+#container .content .chart-container .chart-content .chart-item .line_char {
+    width: 700px;
+    height: 400px;
+}
+
+#container .content .chart-container form#dataForm {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#container .content .chart-container form#dataForm .heading {
+    font-size: 3rem;
+    text-align: center;
+}
+
+#container .content .chart-container form#dataForm label {
+    font-size: 1.6rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+#container .content .chart-container form#dataForm select, input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    font-size: 1.6rem;
+    border-radius: 5px;
+}
+
+#container .content .chart-container form#dataForm select option {
+    font-size: 1.4rem;
+}
+
+#container .content .chart-container form#dataForm button {
+    padding: 10px 15px;
+    font-size: 1.6rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#container .content .chart-container form#dataForm button:hover {
+    background-color: #45a049;
+}
+
+input[type="text"] {
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button {
+    padding: 6px 10px;
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2563eb;
+}
